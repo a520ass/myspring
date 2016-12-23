@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="${title}">Title</title>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+	href="../../css/bootstrap.min.css" />
+<script type="text/javascript" th:src="@{/webjars/jquery/1.11.3/jquery.min.js}"></script>
+<style type="text/css">
+table,table td,table th {
+	border: 1px solid gray;
+	border-collapse: collapse;
+}
+
+a {
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid black;
+	background: gray;
+	color: white;
+	text-decoration: none;
+	padding: 3px;
+	font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+	<div style="margin: 0 auto; width: 400px; padding-top: 50px;">
+		<h2>已启动流程</h2>
+		<table width="400px;">
+			<thead>
+				<tr>
+					<th>流程实例ID</th>
+					<th>流程定义ID</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+					<tr th:each="temp : ${list}">
+						<td th:text="${temp.id}">${temp.id}</td><td th:text='${temp.processDefinitionId}'>${temp.processDefinitionId}</td><td> <a th:href="@{'/process/graphics?instanceId='+${temp.id}}">图形</a></td>
+					</tr>
+			</tbody>
+		</table>
+		<a th:href="@{/process}">流程模板</a>
+		<a th:href="@{/process/deployed}">已部署流程</a>
+		<a th:href="@{/process/task}">任务列表</a>
+	</div>
+</body>
+</html>

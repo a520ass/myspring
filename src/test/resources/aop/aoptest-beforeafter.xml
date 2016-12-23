@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	
+	<!-- 配置自动扫描的包-->
+	<context:component-scan base-package="com.hf.aop.beforeafter">
+	</context:component-scan> 
+	
+    <bean id="advised" class="com.hf.aop.beforeafter.AdvisedObj" />  
+    <bean id="advising" class="com.hf.aop.beforeafter.AdvisingObj" />  
+  
+    <aop:config>  
+        <aop:aspect ref="advising">  
+              
+            <aop:pointcut id="performance" expression="execution(* com.hf.aop.beforeafter.AdvisedObj.perform(..))" />  
+              
+            <aop:before pointcut-ref="performance" method="beforeExecute" />  
+            <aop:after  pointcut-ref="performance" method="afterExecute" />       
+        </aop:aspect>  
+    </aop:config>
+    
+    <bean id="advisedByproxybean" class="org.springframework.aop.framework.ProxyFactoryBean">
+    	<!-- <property name="interfaces" /> --> <!-- 需要代理的接口 -->
+        <property name="target" ref="advised"/>     <!-- 需要被切入的类 -->
+        <property name="interceptorNames">                 <!-- 拦截器名称（也就是通知类名称，Spring Bean 的 id） -->
+            <list>
+                <value>advisedBeforeAdvice</value>
+                <value>advisedAfterAdvice</value>
+            </list>
+        </property>
+        <property name="proxyTargetClass" value="true"></property><!-- 强制使用cglib代理 -->
+    </bean>
+    
+    <!-- 这里使用了false。但是。上述aop写法中，还是使用的cglib代理。需要源码研究 -->
+    <aop:aspectj-autoproxy proxy-target-class="false"></aop:aspectj-autoproxy>
+</beans>

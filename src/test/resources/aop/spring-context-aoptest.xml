@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	
+	<!-- 配置自动扫描的包-->
+	<context:component-scan base-package="com.hf.aop.component">
+	</context:component-scan> 
+	
+    <bean id="greetingProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+    	<property name="interfaces" value="com.hf.aop.component.Apology"></property>
+    	<property name="target" ref="greetingImpl"></property>
+    	<property name="interceptorNames">			<!-- 拦截器名称（也就是增强类名称，Spring Bean 的 id） -->
+    		<list>
+    			<value>greetingIntroAdvice</value>
+    		</list>
+    	</property>
+    	<property name="proxyTargetClass" value="true"></property>
+    	<!-- 
+    	注意 proxyTargetClass 属性，它表明是否代理目标类，
+    	默认为 false，也就是代理接口了，此时 Spring 就用 JDK 动态代理。
+    	如果为 true，那么 Spring 就用 CGLib 动态代理。
+    	 -->
+    </bean>
+    
+    <!-- <aop:config>  
+        <aop:aspect ref="greetingThrowAdvice"> 
+            <aop:declare-parents   
+                types-matching="com.hf.aop.component.Greeting+"   
+                implement-interface="com.hf.aop.component.Apology"  
+                delegate-ref="apologyImpl" />   
+        </aop:aspect>  
+    </aop:config> -->
+    <!-- types-matching接口或实现类都可以 -->
+    
+    <aop:config>  
+        <aop:aspect> 
+            <aop:declare-parents   
+                types-matching="com.hf.aop.component.Greeting+"   
+                implement-interface="com.hf.aop.component.Apology"  
+                default-impl="com.hf.aop.component.ApologyImpl"/>   
+        </aop:aspect>  
+    </aop:config>
+    
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+</beans>

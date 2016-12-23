@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="${title}">Title</title>
+<link rel="stylesheet" th:href="@{/resources/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+	href="../../css/bootstrap.min.css" />
+<script type="text/javascript" th:src="@{/resources/webjars/jquery/1.11.3/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/webjars/sockjs-client/1.0.2/sockjs.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/webjars/stomp-websocket/2.3.3/stomp.min.js}"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		/* var url = 'ws://' + window.location.host + '/springside/marco';
+		var sock = new WebSocket(url);	//原生wesocket写法
+		//var url='marco';
+		//var sock = new SockJS(url);	//sockjs写法
+		sock.onopen = function() {
+
+			console.log('Opening');
+			sayMarco();
+		};
+		sock.onmessage = function(e) {
+			console.log('Received message: ', e.data);
+			setTimeout(function() {
+				sayMarco()
+			}, 2000);
+		};
+		sock.onclose = function() {
+			console.log('Closing');
+		};
+		function sayMarco() {
+			console.log('Sending Marco!');
+			sock.send("Marco!");
+		} */
+		var url = 'http://' + window.location.host + '/springside/stompendpoint';
+		var sock = new SockJS(url);
+		var stomp = Stomp.over(sock);
+		var payload = JSON.stringify({ 'message': 'Marco!' });
+		stomp.connect({}, function(frame) {
+		stomp.send("/app/marco", {}, payload);
+		});
+		
+		var sock = new SockJS('/springside/stompendpoint');
+		var stomp = Stomp.over(sock);
+		stomp.connect({}, function(frame) {
+			console.log('Connected');
+			stomp.subscribe("/user/queue/notifications", handleShout);
+			//stomp.subscribe("/topic/shout", handleShout);
+		});
+		function handleShout(incoming) {
+			var shout = JSON.parse(incoming.body);
+			console.log('Received: ', shout);
+			
+		}
+	});
+	
+</script>
+</head>
+<body>
+	<div class="container">
+		<div class="navbar">
+			<div class="navbar-inner">
+				<a class="brand" href="http://www.thymeleaf.org"> Thymeleaf -
+					Plain </a>
+				<ul class="nav">
+					<li><a th:href="@{/home}" href="home.html"> Home </a></li>
+				</ul>
+			</div>
+		</div>
+		<h1 th:text="${title}">Title</h1>
+		<div th:text="${message}">Fake content</div>
+		<div id="created" th:text="${#dates.format(date)}">July 11,
+			2012 2:17:16 PM CDT</div>
+		<form th:action="@{/upload}" method="post" enctype="multipart/form-data">
+			<label>Profile Picture</label>:
+			<input type="file"
+			name="profilePicture"
+			accept="image/jpeg,image/png,image/gif" /><br/>
+			
+			<button type="submit">upload</button>
+		</form>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+	</div>
+</body>
+</html>
