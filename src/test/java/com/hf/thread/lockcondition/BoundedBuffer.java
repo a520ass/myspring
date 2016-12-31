@@ -5,7 +5,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * 使用Lock Condition实现阻塞队列
+ * 使用Lock Condition实现阻塞队列FIFO
  * Created by 520 on 2016/12/31.
  */
 public class BoundedBuffer {

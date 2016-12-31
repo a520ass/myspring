@@ -1,7 +1,7 @@
 package com.hf.thread.waitnotify;
 
 /**
- * 使用wait notify实现阻塞队列
+ * 使用wait notify实现阻塞队列 FIFO
  * Created by 520 on 2016/12/29.
  */
 public class BoundedBuffer_Synchronized {
@@ -12,30 +12,30 @@ public class BoundedBuffer_Synchronized {
 
     public void put(Object obj) throws InterruptedException {
         synchronized(notFull){
-            while (count==items.length){
+            while (count==items.length){//当count等于总长度的时候，队列已经满了 阻塞put方法
                 notFull.wait();
             }
         }
         items[putidx]=obj;
         if (++putidx==items.length){
-            putidx=0;
+            putidx=0;   // 如果下标到达数组边界，循环下标置为0
         }
         count++;
         synchronized (notEmpty){
-            notEmpty.notify();
+            notEmpty.notify();// 唤醒notEmpty
         }
     }
 
     public Object take() throws InterruptedException{
         synchronized(notEmpty){
-            while(count == 0){ // 啥也没有呢 取啥
+            while(count == 0){ // 啥也没有呢 取啥 直接阻塞
                 notEmpty.wait();
             }
         }
         Object x = items[takeidx];
         System.out.println("取第"+takeidx+"个元素"+x);
         if(++takeidx == items.length){
-            takeidx = 0;
+            takeidx = 0;    // 如果下标到达数组边界，循环下标置为0
         }
         count --;
         synchronized (notFull) {
