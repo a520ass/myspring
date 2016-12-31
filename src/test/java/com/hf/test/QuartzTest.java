@@ -13,13 +13,14 @@ import com.hf.config.quartz.QuartzConfig;
 import com.hf.config.quartz.QuartzManager;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {QuartzConfig.class})
+@ContextConfiguration(classes = {QuartzConfig.class,QuartzManager.class})
 public class QuartzTest {
 	
 	@Autowired
 	private Scheduler scheduler;
 	
-	@Autowired QuartzManager quartzManager;
+	@Autowired(required=false)
+	QuartzManager quartzManager;
 	
 	
 	
@@ -35,7 +36,7 @@ public class QuartzTest {
 	
 	@Test
 	public void test() throws SchedulerException, InterruptedException{
-		scheduler.isStarted();
+		scheduler.start();
 		//Thread.sleep(50000L);
 		//scheduler.shutdown(true);
 		//这里获取任务信息数据
@@ -86,7 +87,7 @@ public class QuartzTest {
                 scheduler.rescheduleJob(triggerKey, trigger);
             }
         }*/
-		Thread.sleep(500000L);
+		//Thread.sleep(500000L);
 	}
 	
 }

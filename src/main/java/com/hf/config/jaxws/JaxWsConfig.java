@@ -14,7 +14,7 @@ public class JaxWsConfig {
 	@Bean
 	public SimpleJaxWsServiceExporter jaxWsServiceExporter(){
 		SimpleJaxWsServiceExporter jaxWsServiceExporter = new SimpleJaxWsServiceExporter();
-		//jaxWsServiceExporter.setBaseAddress("http://127.0.0.1:8089/springside/ws");
+		//jaxWsServiceExporter.setBaseAddress("http://127.0.0.1:8089/myspring/ws");
 		return jaxWsServiceExporter;
 	}
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2005-2012 springside.org.cn
+ * Copyright (c) 2005-2012 myspring.org.cn
  */
 package com.hf.utils.reflect;
 

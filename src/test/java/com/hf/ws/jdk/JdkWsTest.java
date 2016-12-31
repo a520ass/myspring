@@ -11,7 +11,7 @@ public class JdkWsTest {
 	
 	/**
 	 * 生成客户端代码
-	 * wsimport -keep -p com.hf.ws.jdk.client http://localhost:8080/springside/jdkWebService?wsdl
+	 * wsimport -keep -p com.hf.ws.jdk.client http://localhost:8080/myspring/jdkWebService?wsdl
 	 * 命令参数说明：
 	　　-d:生成客户端执行类的class文件的存放目录
 	　　-s:生成客户端执行类的源文件的存放目录
@@ -19,7 +19,7 @@ public class JdkWsTest {
 	　　其他命令参数请参照：http://download-llnw.oracle.com/javase/6/docs/technotes/tools/share/wsimport.html
 	 */
 	public static void main(String[] args) {
-		Endpoint.publish("http://localhost:8080/springside/jdkWebService", new JdkWebServiceImpl());   
+		Endpoint.publish("http://localhost:8080/myspring/jdkWebService", new JdkWebServiceImpl());   
 	}
 	
 	/**

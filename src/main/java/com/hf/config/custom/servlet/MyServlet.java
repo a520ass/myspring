@@ -1,16 +1,11 @@
 package com.hf.config.custom.servlet;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.Endpoint;
-
-import com.hf.config.jaxws.jdkpublish.WebServiceEndpoint;
-import com.hf.ws.jdk.JdkWebServiceImpl;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class MyServlet extends HttpServlet {
 
@@ -21,7 +16,7 @@ public class MyServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		//Endpoint.publish("http://localhost:8081/springside/jdkpublishws", new WebServiceEndpoint());
+		//Endpoint.publish("http://localhost:8081/myspring/jdkpublishws", new WebServiceEndpoint());
 	}
 
 	@Override

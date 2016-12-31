@@ -317,6 +317,29 @@
 		</dependency>
 		
 		<dependency>
+		    <groupId>us.codecraft</groupId>
+		    <artifactId>webmagic-core</artifactId>
+		    <version>0.6.0</version>
+		    <exclusions>
+		        <exclusion>
+		            <groupId>org.slf4j</groupId>
+		            <artifactId>slf4j-log4j12</artifactId>
+		        </exclusion>
+		    </exclusions>
+		</dependency>
+		<dependency>
+		    <groupId>us.codecraft</groupId>
+		    <artifactId>webmagic-extension</artifactId>
+		    <version>0.6.0</version>
+		    <exclusions>
+		        <exclusion>
+		            <groupId>org.slf4j</groupId>
+		            <artifactId>slf4j-log4j12</artifactId>
+		        </exclusion>
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
             <groupId>org.csource</groupId>
             <artifactId>fastdfs_client</artifactId>
             <version>1.25</version>
@@ -399,7 +422,7 @@
 				<configuration>
 				<url>http://10.11.82.82:18080/manager/text</url>
 				<server>TomcatServer</server>
-				<path>/springside</path>
+				<path>/myspring</path>
 				<username>hefeng</username>
 				<password>admin</password>
 				</configuration>

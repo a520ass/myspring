@@ -9,7 +9,7 @@
 <script type="text/javascript" th:src="@{/resources/webjars/stomp-websocket/2.3.3/stomp.min.js}"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		/* var url = 'ws://' + window.location.host + '/springside/marco';
+		/* var url = 'ws://' + window.location.host + '/myspring/marco';
 		var sock = new WebSocket(url);	//原生wesocket写法
 		//var url='marco';
 		//var sock = new SockJS(url);	//sockjs写法
@@ -31,7 +31,7 @@
 			console.log('Sending Marco!');
 			sock.send("Marco!");
 		} */
-		var url = 'http://' + window.location.host + '/springside/stompendpoint';
+		var url = 'http://' + window.location.host + '/myspring/stompendpoint';
 		var sock = new SockJS(url);
 		var stomp = Stomp.over(sock);
 		var payload = JSON.stringify({ 'message': 'Marco!' });
@@ -39,7 +39,7 @@
 		stomp.send("/app/marco", {}, payload);
 		});
 		
-		var sock = new SockJS('/springside/stompendpoint');
+		var sock = new SockJS('/myspring/stompendpoint');
 		var stomp = Stomp.over(sock);
 		stomp.connect({}, function(frame) {
 			console.log('Connected');

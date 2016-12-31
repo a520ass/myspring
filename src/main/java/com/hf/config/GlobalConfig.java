@@ -14,7 +14,7 @@ public abstract class GlobalConfig {
 	/**
 	 * 项目访问根路径（内部）
 	 */
-	public static final String CTXLOCAL="http://127.0.0.1:8081/springside";
+	public static final String CTXLOCAL="http://127.0.0.1:8081/myspring";
 	
 	/**
 	 * rmi

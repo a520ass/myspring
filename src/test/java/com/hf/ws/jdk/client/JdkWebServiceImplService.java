@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "JdkWebServiceImplService", targetNamespace = "http://jdk.ws.hf.com/", wsdlLocation = "http://localhost:8080/springside/jdkWebService?wsdl")
+@WebServiceClient(name = "JdkWebServiceImplService", targetNamespace = "http://jdk.ws.hf.com/", wsdlLocation = "http://localhost:8080/myspring/jdkWebService?wsdl")
 public class JdkWebServiceImplService
     extends Service
 {
@@ -30,7 +30,7 @@ public class JdkWebServiceImplService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:8080/springside/jdkWebService?wsdl");
+            url = new URL("http://localhost:8080/myspring/jdkWebService?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

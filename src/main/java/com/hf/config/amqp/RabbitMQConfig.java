@@ -36,9 +36,9 @@ public class RabbitMQConfig implements RabbitListenerConfigurer{
 	
 	@Autowired SimpleRabbitListenerContainerFactory myRabbitListenerContainerFactory;
 
-	public static final String EXCHANGE = "springside-exchange";
-	public static final String ROUTINGKEY = "springside-routingKey";
-	public static final String QUEUENAME = "springside-queue";
+	public static final String EXCHANGE = "myspring-exchange";
+	public static final String ROUTINGKEY = "myspring-routingKey";
+	public static final String QUEUENAME = "myspring-queue";
 
 	@Bean
 	public CachingConnectionFactory amqpcachingConnectionFactory() {

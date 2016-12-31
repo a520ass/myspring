@@ -16,12 +16,12 @@
 
 #mysql database setting
 jdbc.driver=com.mysql.jdbc.Driver
-jdbc.url=jdbc:mysql://127.0.0.1:3306/springside?useUnicode=true&characterEncoding=utf-8
+jdbc.url=jdbc:mysql://127.0.0.1:3306/myspring?useUnicode=true&characterEncoding=utf-8
 jdbc.username=root
 jdbc.password=hf0321
 
 #jdbc.driver=com.mysql.jdbc.Driver
-#jdbc.url=jdbc:mysql://10.11.82.71:13306/springside?useUnicode=true&characterEncoding=utf-8
+#jdbc.url=jdbc:mysql://10.11.82.71:13306/myspring?useUnicode=true&characterEncoding=utf-8
 #jdbc.username=root
 #jdbc.password=123
 

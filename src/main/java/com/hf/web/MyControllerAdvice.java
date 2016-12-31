@@ -28,7 +28,7 @@ public class MyControllerAdvice extends ResponseEntityExceptionHandler{
 	@ModelAttribute
 	public void sysData(Model model) {
 		// System.out.println("============应用到所有@RequestMapping注解方法，在其执行之前把返回值放入Model");
-		model.addAttribute("sysroot", "springside");
+		model.addAttribute("sysroot", "myspring");
 	}
 	
 	@ExceptionHandler(Exception.class)

@@ -23,7 +23,7 @@ public class JdbcTest {
 		
 		//从jdbc4.0开始，不需要显示注册了。上述操作不需要了。
 		
-//		final String url="jdbc:mysql://localhost:3306/springside";
+//		final String url="jdbc:mysql://localhost:3306/myspring";
 		final String oracleUrl="jdbc:oracle:thin:@125.35.5.94:1521:orcl";
 		Connection connection = DriverManager.getConnection(oracleUrl, "HEFENG3", "admin");
 		final String sql = "select * from \"test\"";
