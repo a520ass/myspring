@@ -15,6 +15,9 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.format.datetime.DateFormatter;
+import org.springframework.format.datetime.DateFormatterRegistrar;
+import org.springframework.format.number.NumberFormatAnnotationFormatterFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -192,11 +195,21 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
         // Add formatters and/or converters
+
+		// Ensure @NumberFormat is still supported
+		// 默认已经注册了。
+		// 见org.springframework.format.support.DefaultFormattingConversionService.addDefaultFormatters()
+
+		//registry.addFormatterForFieldAnnotation(new NumberFormatAnnotationFormatterFactory());
+		// Register date conversion with a specific global format
+		/*DateFormatterRegistrar registrar = new DateFormatterRegistrar();
+		registrar.setFormatter(new DateFormatter("yyyy-MM-dd"));
+		registrar.registerFormatters(registry);*/
     }
 	
 	/**
 	 * @see WebMvcConfigurationSupport 
-	 * @see addDefaultHttpMessageConverters
+	 * @see //addDefaultHttpMessageConverters
 	 */
     @Override
 	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {

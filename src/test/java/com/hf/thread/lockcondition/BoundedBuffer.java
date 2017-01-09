@@ -60,14 +60,14 @@ public class BoundedBuffer {
 
     public static void main(String[] args) throws InterruptedException {
         final BoundedBuffer bb = new BoundedBuffer();
-        System.out.println(Thread.currentThread()+","+bb);
+        System.out.println(Thread.currentThread() + "," + bb);
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     Thread.sleep(1000);
-                    System.out.println(Thread.currentThread()+","+bb);
+                    System.out.println(Thread.currentThread() + "," + bb);
                     bb.put("xx");
                     bb.put("yy");
                     bb.put("zz");
