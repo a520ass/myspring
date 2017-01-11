@@ -1,10 +1,9 @@
 package com.hf.config.hadoop;
 
-import org.apache.avro.reflect.Nullable;
 
 public class FileInfo {
 	private String name;
-	private @Nullable String path;
+	private  String path;
 	private long size;
 	private long modified;
 
