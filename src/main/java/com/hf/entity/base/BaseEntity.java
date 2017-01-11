@@ -15,12 +15,10 @@
  */
 package com.hf.entity.base;
 
+
 import java.io.Serializable;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 /**
  * Simple JavaBean domain object with an id property. Used as a base class for objects needing this property.
@@ -38,12 +36,27 @@ public class BaseEntity implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 
+    /**
+     * 使用version机制实现乐观锁
+     */
+	@Version
+    @Column(name="OPTLOCK")
+	protected int version;
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 
     public boolean isNew() {

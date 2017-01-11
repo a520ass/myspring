@@ -96,7 +96,7 @@
             注意：如果在key class或者record class中有root class相同的属性，MBG就不会重新生成这些属性了，包括：
                 1，属性名相同，类型相同，有相同的getter/setter方法；
          -->
-        <property name="rootClass" value="spittr.entity.base.DataEntity"/>
+        <property name="rootClass" value="com.hf.entity.base.DataEntity"/>
 
         <!-- 设置是否在getter方法中，对String类型字段调用trim()方法 -->
         <property name="trimStrings" value="true"/>

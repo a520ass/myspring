@@ -15,6 +15,9 @@
  */
 package com.hf.entity.base;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.util.Date;
 
 import javax.persistence.MappedSuperclass;
@@ -37,9 +40,11 @@ public class DataEntity extends BaseEntity {
 	protected String updateUser;
 	
 	//@DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
+	@CreationTimestamp
 	protected Date createDate;
 	
 	//@DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
+	@UpdateTimestamp
 	protected Date updateDate;
 	
 	protected Integer sort;
