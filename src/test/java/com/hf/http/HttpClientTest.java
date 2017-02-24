@@ -2,9 +2,11 @@ package com.hf.http;
 
 import java.io.IOException;
 
+import com.hf.utils.web.WebUtils;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.junit.Test;
 
 public class HttpClientTest {
 	
@@ -25,5 +27,10 @@ public class HttpClientTest {
      //System.out.println(method.getResponseBodyAsString());      
        //释放连接      
      method.releaseConnection();      
-    }   
+    }
+
+    @Test
+    public void test(){
+        WebUtils.getServerIp();
+    }
 }

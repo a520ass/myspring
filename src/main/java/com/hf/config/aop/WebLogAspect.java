@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.hf.utils.web.WebUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -39,7 +40,7 @@ public class WebLogAspect {
         logger.info("HTTP_METHOD : {} ## URL : {} ## IP : {} ## CLASS_METHOD : {} ## ARGS : {}",
         		request.getMethod(),
         		request.getRequestURL().toString(),
-        		getIpAddr(request),
+				WebUtils.getIpAddr(request),
         		joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName(),
         		Arrays.toString(joinPoint.getArgs()));
 //        logger.info(" : " + request.getMethod());
@@ -76,35 +77,5 @@ public class WebLogAspect {
 		}
 		return ip;
 	}*/
-	
-	/**
-	 * 获得用户远程地址
-	 */
-	public static final String getIpAddr(final HttpServletRequest request)  
-	        throws Exception {  
-	    if (request == null) {  
-	        throw (new Exception("getIpAddr method HttpServletRequest Object is null"));  
-	    }  
-	    String ipString = request.getHeader("x-forwarded-for");  
-	    if (StringUtils.isEmpty(ipString) || "unknown".equalsIgnoreCase(ipString)) {  
-	        ipString = request.getHeader("Proxy-Client-IP");  
-	    }  
-	    if (StringUtils.isEmpty(ipString) || "unknown".equalsIgnoreCase(ipString)) {  
-	        ipString = request.getHeader("WL-Proxy-Client-IP");  
-	    }  
-	    if (StringUtils.isEmpty(ipString) || "unknown".equalsIgnoreCase(ipString)) {  
-	        ipString = request.getRemoteAddr();  
-	    }  
-	  
-	    // 多个路由时，取第一个非unknown的ip  
-	    final String[] arr = ipString.split(",");  
-	    for (final String str : arr) {  
-	        if (!"unknown".equalsIgnoreCase(str)) {  
-	            ipString = str;  
-	            break;  
-	        }  
-	    }  
-	  
-	    return ipString;  
-	}
+
 }
