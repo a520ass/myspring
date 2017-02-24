@@ -71,6 +71,11 @@
 	        <!-- always总是返回PageInfo类型,check检查返回类型是否为PageInfo,none返回Page -->
 	        <property name="returnPageInfo" value="none"/>
 	    </plugin>
+
+		<!-- mybatis 乐观锁插件-->
+		<plugin interceptor="com.mook.locker.interceptor.OptimisticLocker">
+			<property name="versionColumn" value="version"/>
+		</plugin>
 	</plugins>
 	
 </configuration>
