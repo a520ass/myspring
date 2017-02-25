@@ -76,7 +76,7 @@ public class MyWebAppInitializer extends AbstractAnnotationConfigDispatcherServl
 				.addFilter("hiddenHttpMethodFilter", HiddenHttpMethodFilter.class);
 		hiddenHttpMethodFilter.addMappingForUrlPatterns(null, false, "/*");
 		/**
-		 * openEntityManagerInViewFilter 可以解决hibernate的懒加载异常的问题
+		 * openEntityManagerInViewFilter 可以解决hibernate（jpa的一个实现）的懒加载异常的问题
 		 */
 		FilterRegistration.Dynamic openEntityManagerInViewFilter = servletContext
 				.addFilter("openEntityManagerInViewFilter", OpenEntityManagerInViewFilter.class);
