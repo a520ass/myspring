@@ -244,6 +244,10 @@ public class WebConfig extends WebMvcConfigurerAdapter{
         // Configure the list of HttpMessageConverters to use
     }*/
 
+	/**
+	 * HandlerInteceptor一般用于权限验证，以及一些处理风格本地化等公共代码。
+	 * Filter一般用于修改请求内容和界面的解析处理相关。
+	 */
 	@Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new MyHandlerInterceptor());
