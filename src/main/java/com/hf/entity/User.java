@@ -28,8 +28,8 @@ public class User extends DataEntity{
 	@NotNull
 	private String name;
 	
-	@Enumerated(EnumType.STRING)
-    private ROLE role;
+	//@Enumerated(EnumType.STRING)
+    private String role;
 
     private String username;
     
@@ -58,11 +58,11 @@ public class User extends DataEntity{
 		this.name = name;
 	}
 
-	public ROLE getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(ROLE role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 

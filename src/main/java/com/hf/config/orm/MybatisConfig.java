@@ -14,7 +14,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 
 import com.hf.config.GlobalConfig;
 
-@Configuration
+//@Configuration
 @MapperScan("com.mybatis.mapper")
 public class MybatisConfig {
 

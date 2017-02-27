@@ -60,7 +60,7 @@ public class LoginController {
 		user.setId(3);
 		user.setEmail("11");
 		user.setName("he");
-		user.setRole(ROLE.user);
+		user.setRole(ROLE.user.name());
 		userService.save(user);
 		return "/login";
 	}

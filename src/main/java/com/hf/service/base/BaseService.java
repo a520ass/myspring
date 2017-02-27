@@ -34,10 +34,10 @@ public abstract class BaseService<T, ID extends Serializable> {
 
 	@SuppressWarnings("unchecked")
 	public T save(T entity) {
-		ID idFieldValue = (ID) Reflections.getFieldValue(entity, "id");
+		/*ID idFieldValue = (ID) Reflections.getFieldValue(entity, "id");
 		if(idFieldValue==null){
 			Reflections.setFieldValue(entity, "id", UUID.randomUUID());
-		}
+		}*/
 		return repository.save(entity);
 	}
 	

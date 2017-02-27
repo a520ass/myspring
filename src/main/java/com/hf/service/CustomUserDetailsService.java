@@ -43,10 +43,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 			}
 			//权限信息从这里获取，并添加到user中
 			List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-			authorities.add(new SimpleGrantedAuthority(dbuser.getRole().name()));
+			authorities.add(new SimpleGrantedAuthority(dbuser.getRole()));
 
 			log.info("username is " + username + ", role is "
-					+ dbuser.getRole().name());
+					+ dbuser.getRole());
 
 			 user = new org.springframework.security.core.userdetails.User(
 					username, dbuser.getPassword(), authorities);
@@ -67,5 +67,4 @@ public class CustomUserDetailsService implements UserDetailsService {
 	 * String string = pwe.encodePassword("hefeng1995", "admin");
 	 * System.err.print(string); }
 	 */
-
 }

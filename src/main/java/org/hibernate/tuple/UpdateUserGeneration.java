@@ -4,15 +4,16 @@ import com.hf.utils.core.UserUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.annotations.CreationUser;
+import org.hibernate.annotations.UpdateUser;
 
 /**
  * Created by 520 on 2017/1/10.
  */
-public class CreationUserGeneration implements AnnotationValueGeneration<CreationUser> {
+public class UpdateUserGeneration implements AnnotationValueGeneration<UpdateUser> {
     private ValueGenerator<?> generator;
 
     @Override
-    public void initialize(CreationUser annotation, Class<?> propertyType) {
+    public void initialize(UpdateUser annotation, Class<?> propertyType) {
         if(int.class.isAssignableFrom(propertyType)||Integer.class.isAssignableFrom(propertyType)){
             generator=new ValueGenerator<Integer>(){
 
@@ -47,7 +48,7 @@ public class CreationUserGeneration implements AnnotationValueGeneration<Creatio
 
     @Override
     public GenerationTiming getGenerationTiming() {
-        return GenerationTiming.INSERT;
+        return GenerationTiming.ALWAYS;
     }
 
     @Override

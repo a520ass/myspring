@@ -22,7 +22,6 @@ public class RmiConfig {
 		exporter.setServiceName("AccountService");
 		exporter.setService(accountService);
 		exporter.setServiceInterface(AccountService.class);
-		
 		//exporter.setRegistryHost("127.0.0.1");
 		exporter.setRegistryPort(1099);
 		return exporter;

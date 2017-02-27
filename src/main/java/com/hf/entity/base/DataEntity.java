@@ -16,7 +16,9 @@
 package com.hf.entity.base;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.CreationUser;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.UpdateUser;
 
 import java.util.Date;
 
@@ -35,8 +37,9 @@ import javax.persistence.MappedSuperclass;
 public class DataEntity extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
-	
+	@CreationUser
 	protected String createUser;
+	@UpdateUser
 	protected String updateUser;
 	
 	//@DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
