@@ -23,7 +23,6 @@ public class UserUtils {
             Authentication authentication =
                     SecurityContextHolder.getContext().getAuthentication();
             User user= (User) authentication.getPrincipal();
-            //sysuser = SpringContextHolder.getBean(UserRepository.class).findByUsername(user.getUsername());
             String sql="select * from user where username = ?";
            Object[] args= {user.getUsername()};
             sysuser = SpringContextHolder.getBean(JdbcTemplate.class).queryForObject(sql, args,com.hf.entity.User.class);

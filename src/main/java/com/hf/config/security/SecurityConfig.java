@@ -81,6 +81,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.deleteCookies("JSESSIONID")
 				.permitAll()	//Grants access to the logoutSuccessUrl(String) and the logoutUrl(String) for every user.
 				.and()
+			.headers()
+				.xssProtection()
+				.block(false)
+				.and().and()
 			.sessionManagement()
 				.invalidSessionUrl("/login?invalidsession")
 				.maximumSessions(2)		//只能同时登陆两个
@@ -90,7 +94,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				 * 如果要限制用户再次登录可以设置concurrency-control的error-if-maximum-exceeded的值为true
 				 */
 				.expiredUrl("/login?expired")
-				.sessionRegistry(sessionRegistry()); 
+				.sessionRegistry(sessionRegistry());
 				
 	}
 

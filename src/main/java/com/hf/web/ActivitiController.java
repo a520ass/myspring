@@ -1,5 +1,6 @@
 package com.hf.web;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -16,7 +17,10 @@ import org.activiti.engine.impl.interceptor.Command;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +32,18 @@ public class ActivitiController {
 
 	@Resource
 	ProcessEngine engine;
+	@Autowired
+	RepositoryService repositoryService;
+
+	/**
+	 * 列出diagrams文件夹下的文件
+	 * @return
+	 */
+	private static String[] listTemplate(){
+		String basePath=ActivitiController.class.getResource("/").getPath();
+		basePath=basePath.substring(1,basePath.length());
+		return new File(basePath+File.separator+"diagrams").list();
+	}
 
 	/**
 	 * 
@@ -35,13 +51,9 @@ public class ActivitiController {
 	 */
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView list(ModelAndView mav) {
-
-		mav.addObject("list", Util.list());
-
-		mav.setViewName("process/template");
-
-		return mav;
+	public String list(Model model) {
+		model.addAttribute("list", listTemplate());
+		return "process/template";
 
 	}
 
@@ -52,25 +64,13 @@ public class ActivitiController {
 
 	@RequestMapping("deploy")
 	public ModelAndView deploy(String processName, ModelAndView mav) {
-
-		RepositoryService service = engine.getRepositoryService();
-
-		if (null != processName)
-
-			service.createDeployment()
-
-			.addClasspathResource("diagrams/" + processName).deploy();
-
-		List<ProcessDefinition> list = service.createProcessDefinitionQuery()
-
-		.list();
-
+		if (StringUtils.isNotBlank(processName)){
+			repositoryService.createDeployment().addClasspathResource("diagrams/" + processName).deploy();
+		}
+		List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery().list();
 		mav.addObject("list", list);
-
 		mav.setViewName("process/deployed");
-
 		return mav;
-
 	}
 
 	/**
