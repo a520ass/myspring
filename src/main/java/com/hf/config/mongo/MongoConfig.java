@@ -19,7 +19,7 @@ public class MongoConfig extends AbstractMongoConfiguration{
 
 	@Override
 	public Mongo mongo() throws Exception {
-		return new MongoClient("10.15.0.56");
+		return new MongoClient("purelybeibei.com");
 	}
 	
 }
