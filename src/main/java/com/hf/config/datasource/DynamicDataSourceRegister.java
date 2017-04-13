@@ -71,12 +71,6 @@ public class DynamicDataSourceRegister implements
 
 	/**
 	 * 创建DataSource
-	 *
-	 * @param type
-	 * @param driverClassName
-	 * @param url
-	 * @param username
-	 * @param password
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")

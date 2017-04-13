@@ -1,6 +1,7 @@
 package com.hf.utils.core;
 
 
+import com.google.common.collect.Maps;
 import com.hf.config.custom.SpringContextHolder;
 import com.hf.repository.UserRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,18 +17,19 @@ import java.util.Map;
  */
 public class UserUtils {
 
-    private static com.hf.entity.User sysuser;
+    private static final Map<String,com.hf.entity.User> sysuserMap= Maps.newHashMap();
 
     public static com.hf.entity.User getUser(){
-        if(sysuser==null){
-            Authentication authentication =
-                    SecurityContextHolder.getContext().getAuthentication();
-            User user= (User) authentication.getPrincipal();
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+        User user= (User) authentication.getPrincipal();
+        com.hf.entity.User userI = sysuserMap.get(user.getUsername());
+        if(userI==null){
             String sql="select * from user where username = ?";
-           Object[] args= {user.getUsername()};
-            sysuser = SpringContextHolder.getBean(JdbcTemplate.class).queryForObject(sql, args,com.hf.entity.User.class);
-
+            Object[] args= {user.getUsername()};
+            userI=SpringContextHolder.getBean(JdbcTemplate.class).queryForObject(sql, args,com.hf.entity.User.class);
+            sysuserMap.put(user.getUsername(),userI);
         }
-        return sysuser;
+        return userI;
     }
 }

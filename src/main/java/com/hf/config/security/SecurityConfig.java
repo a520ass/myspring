@@ -25,6 +25,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.cache.SpringCacheBasedUserCache;
 
 import com.hf.service.CustomUserDetailsService;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -63,11 +64,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		// @formatter:off
 		http
 			.authorizeRequests()
 				.antMatchers(HttpMethod.GET, "/register").permitAll()
 				.anyRequest().authenticated()
 				.and()
+			.exceptionHandling()
+				.accessDeniedPage("/login.jsp?authorization_error=true")
+				.and()
+				// TODO: put CSRF protection back into this endpoint
+				.csrf()
+				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/oauth/authorize"))
+				.disable()
 			.formLogin()
 				.loginPage("/login")
 				.defaultSuccessUrl("/home")
@@ -95,6 +104,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				 */
 				.expiredUrl("/login?expired")
 				.sessionRegistry(sessionRegistry());
+		// @formatter:on
 				
 	}
 
@@ -133,7 +143,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public UserCache userCache(CacheManager cacheManager) throws Exception{
-		SpringCacheBasedUserCache uc=new SpringCacheBasedUserCache(cacheManager.getCache("springsecurityusercache"));
+		SpringCacheBasedUserCache uc=new SpringCacheBasedUserCache(cacheManager.getCache("spring-security-usercache"));
 		return uc;
 	}
 	

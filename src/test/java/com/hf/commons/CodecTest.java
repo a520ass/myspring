@@ -3,6 +3,7 @@ package com.hf.commons;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 
+import org.apache.commons.codec.binary.Base64;
 import org.junit.Test;
 
 import com.hf.utils.codec.Base58;
@@ -17,6 +18,18 @@ public class CodecTest {
 		String encode = Base58.encode("Hello world");
 		System.out.println(encode);
 	}
+
+
+    @Test
+    public void testBase64UrlSafe() throws UnsupportedEncodingException {
+        String s = Base64.encodeBase64URLSafeString("fm（坟墓）.xls".getBytes());
+
+        byte[] decode = new Base64(true).decode(s.getBytes("utf-8"));
+        String s1 = new String(decode, "utf-8");
+        System.out.println(s1);
+       /* String encode = Base58.encode("Hello world");
+        System.out.println(encode);*/
+    }
 	
 	@Test
 	public void test2(){

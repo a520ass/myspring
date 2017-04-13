@@ -52,12 +52,12 @@ public abstract class DESEncrypt extends BaseEncrypt {
 	/**
 	 * 转换密钥<br>
 	 * 
-	 * @param key
+	 * @param binaryData
 	 * @return
 	 * @throws Exception
 	 */
-	private static Key toKey(byte[] key) throws Exception {
-		DESKeySpec dks = new DESKeySpec(key);
+	private static Key toKey(byte[] binaryData) throws Exception {
+		DESKeySpec dks = new DESKeySpec(binaryData);
 		SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(ALGORITHM);
 		SecretKey secretKey = keyFactory.generateSecret(dks);
 
@@ -86,7 +86,7 @@ public abstract class DESEncrypt extends BaseEncrypt {
 
 	/**
 	 * 加密
-	 * 
+	 *
 	 * @param data
 	 * @param key
 	 * @return
@@ -117,10 +117,10 @@ public abstract class DESEncrypt extends BaseEncrypt {
 	 * @throws Exception
 	 */
 	public static String initKey(String seed) throws Exception {
-		SecureRandom secureRandom = null;
+		SecureRandom secureRandom;
 
 		if (seed != null) {
-			secureRandom = new SecureRandom(decryptBASE64(seed));
+			secureRandom = new SecureRandom(seed.getBytes("utf-8"));
 		} else {
 			secureRandom = new SecureRandom();
 		}

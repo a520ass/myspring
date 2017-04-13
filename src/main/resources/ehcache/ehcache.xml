@@ -99,4 +99,28 @@
             diskExpiryThreadIntervalSeconds="120"
             memoryStoreEvictionPolicy="LRU"/>
 
+	<cache
+			name="spring-security-usercache"
+			maxElementsInMemory="10000"
+			eternal="false"
+			timeToIdleSeconds="600"
+			timeToLiveSeconds="3600"
+			overflowToDisk="false"
+			maxElementsOnDisk="10000000"
+			diskPersistent="false"
+			diskExpiryThreadIntervalSeconds="120"
+			memoryStoreEvictionPolicy="LRU"/>
+
+	<cache
+			name="mybatis-cache"
+			maxElementsInMemory="10000"
+			eternal="false"
+			timeToIdleSeconds="600"
+			timeToLiveSeconds="3600"
+			overflowToDisk="false"
+			maxElementsOnDisk="10000000"
+			diskPersistent="false"
+			diskExpiryThreadIntervalSeconds="120"
+			memoryStoreEvictionPolicy="LRU"/>
+
 </ehcache>

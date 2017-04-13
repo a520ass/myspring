@@ -1,17 +1,15 @@
 package com.hf.commons;
 
-import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * 基础加密组件
@@ -44,29 +42,25 @@ public abstract class BaseEncrypt {
 
 	/**
 	 * BASE64解码
-	 * 
-	 * @param base64字符串
+	 *
 	 * @return	字节数组
 	 * @throws IOException 
 	 */
-	public static byte[] decryptBASE64(String key) throws IOException {
-		return (new BASE64Decoder()).decodeBuffer(key);
+	public static byte[] decryptBASE64(String base64String) throws IOException {
+		return Base64.decodeBase64(base64String);
 	}
 
 	/**
 	 * BASE64编码
-	 * 
-	 * @param 字节数组
 	 * @return	编码后的字符串
 	 */
-	public static String encryptBASE64(byte[] key) {
-		return (new BASE64Encoder()).encodeBuffer(key);
+	public static String encryptBASE64(byte[] binaryData) {
+		return Base64.encodeBase64String(binaryData);
 	}
 
 	/**
 	 * MD5加密（信息摘要，无法还原）
 	 * Message-Digest Algorithm 5
-	 * @param 字节数组
 	 * @return	MD5字节数组
 	 * @throws NoSuchAlgorithmException 
 	 */
@@ -79,8 +73,7 @@ public abstract class BaseEncrypt {
 
 	/**
 	 * SHA加密
-	 * 
-	 * @param 字节数组
+	 *
 	 * @return 加密后的字节数组
 	 * @throws NoSuchAlgorithmException 
 	 */

@@ -9,7 +9,7 @@ public class DESEncryptTest {
 	@Test
 	public void test() throws Exception {
 		String inputStr = "DES";
-		String key = DESEncrypt.initKey();
+		String key = DESEncrypt.initKey("hflovebeibei");//生成密钥key
 		System.err.println("原文:\t" + inputStr);
 
 		System.err.println("密钥:\t" + key);

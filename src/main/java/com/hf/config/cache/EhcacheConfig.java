@@ -9,7 +9,7 @@ import org.springframework.core.io.ClassPathResource;
 
 @Configuration
 public class EhcacheConfig {
-	
+
 	/**
 	 * net.sf.ehcache.CacheManager 工厂
 	 * @return

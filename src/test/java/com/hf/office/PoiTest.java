@@ -1,9 +1,6 @@
 package com.hf.office;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,8 +16,25 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.google.common.collect.Maps;
+import org.junit.Test;
 
 public class PoiTest {
+
+
+	@Test
+	public void test1() throws IOException {
+		InputStream s = new FileInputStream("C:\\Users\\krt\\Documents\\Tencent Files\\280202540\\FileRecv\\1号令集体土地房屋征收及表格及协议2.13\\1号令集体土地房屋征收及表格及协议2.12\\房屋表(最终).xls") ;//new File(pathname).get;
+		Workbook workbook=new HSSFWorkbook(s);
+		Sheet sheet1 = workbook.getSheetAt(4);//表一
+		Row row = sheet1.getRow(1);
+		Cell cell = row.getCell(0);
+		//System.out.println(cell.getStringCellValue());
+		/*cell.setCellValue("赣州经开区某某xxx项目房屋安置人口认定表（表一）");
+		Cell cell20 = sheet1.getRow(2).getCell(0);
+		cell20.setCellValue("被征迁人姓名：何锋  潭东镇  桥兰村  组 2017年 9月 1日");*/
+		//insertRow(sheet1,6,2);
+		workbook.write(new FileOutputStream("C:\\Users\\krt\\Documents\\Tencent Files\\280202540\\FileRecv\\1号令集体土地房屋征收及表格及协议2.13\\1号令集体土地房屋征收及表格及协议2.12\\房屋表(最终)-new.xls"));
+	}
 	
 	public static void main(String[] args) throws IOException {
 		InputStream s = new FileInputStream("d:/Users/520/Documents/Tencent Files/280202540/FileRecv/408 薪资发放单--需OA审批-161206.xlsx") ;//new File(pathname).get;
