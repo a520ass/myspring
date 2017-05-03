@@ -49,6 +49,10 @@ public abstract class DESEncrypt extends BaseEncrypt {
 	 */
 	public static final String ALGORITHM = "DES";
 
+	//算法名称/加密模式/填充方式
+	//DES共有四种工作模式-->>ECB：电子密码本模式、CBC：加密分组链接模式、CFB：加密反馈模式、OFB：输出反馈模式
+	public static final String CIPHER_ALGORITHM = "DES/ECB/NoPadding";
+
 	/**
 	 * 转换密钥<br>
 	 * 
@@ -56,8 +60,9 @@ public abstract class DESEncrypt extends BaseEncrypt {
 	 * @return
 	 * @throws Exception
 	 */
-	private static Key toKey(byte[] binaryData) throws Exception {
+	private static SecretKey toKey(byte[] binaryData) throws Exception {
 		DESKeySpec dks = new DESKeySpec(binaryData);
+		//创建一个密匙工厂，然后用它把DESKeySpec转换成 SecretKey
 		SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(ALGORITHM);
 		SecretKey secretKey = keyFactory.generateSecret(dks);
 
@@ -111,25 +116,19 @@ public abstract class DESEncrypt extends BaseEncrypt {
 
 	/**
 	 * 生成密钥
-	 * 
-	 * @param seed （使用base64编码后的）
 	 * @return
 	 * @throws Exception
 	 */
 	public static String initKey(String seed) throws Exception {
 		SecureRandom secureRandom;
-
 		if (seed != null) {
 			secureRandom = new SecureRandom(seed.getBytes("utf-8"));
 		} else {
 			secureRandom = new SecureRandom();
 		}
-
 		KeyGenerator kg = KeyGenerator.getInstance(ALGORITHM);
 		kg.init(secureRandom);
-
 		SecretKey secretKey = kg.generateKey();
-
 		return encryptBASE64(secretKey.getEncoded());
 	}
 }

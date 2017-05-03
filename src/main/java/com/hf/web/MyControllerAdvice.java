@@ -4,19 +4,20 @@ package com.hf.web;
 import com.hf.utils.web.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver;
 import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @ControllerAdvice
 public class MyControllerAdvice extends ResponseEntityExceptionHandler{
@@ -73,9 +74,9 @@ public class MyControllerAdvice extends ResponseEntityExceptionHandler{
 
 
 
-	/*@InitBinder
+	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-		binder.registerCustomEditor(String.class, new PropertyEditorSupport() {
+		/*binder.registerCustomEditor(String.class, new PropertyEditorSupport() {
 
 			@Override
 			public String getAsText() {
@@ -89,8 +90,8 @@ public class MyControllerAdvice extends ResponseEntityExceptionHandler{
 						.escapeHtml4(text.trim()));
 			}
 
-		});
-	}*/
+		});*/
+	}
 
 }
 

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hf.utils.web.JsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.CacheManager;
@@ -41,6 +43,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.resource.CachingResourceResolver;
 import org.springframework.web.servlet.resource.CachingResourceTransformer;
 import org.springframework.web.servlet.resource.CssLinkResourceTransformer;
@@ -68,11 +71,15 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 	
 	@Autowired
 	@Qualifier("ehCachecacheManager")
-	CacheManager cacheManager;
+	private CacheManager cacheManager;
 	
 	@Autowired 
 	@Qualifier("asyncExecutor")
-	AsyncTaskExecutor asyncTaskExecutor;
+	private AsyncTaskExecutor asyncTaskExecutor;
+
+	@Autowired
+	@Qualifier("requestMappingHandlerAdapter")
+	private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
 	
 	@Bean	//Thymeleaf视图解析器
 	public ViewResolver viewResolver(TemplateEngine templateEngine) {
@@ -216,20 +223,25 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     	int json=0;
     	int xml=0;
     	for (int i = 0; i < converters.size(); i++) {
-    		//修改StringHttpMessageConverter的字符编码
-    		if(converters.get(i) instanceof StringHttpMessageConverter){
+			HttpMessageConverter<?> httpMessageConverter = converters.get(i);
+			//修改StringHttpMessageConverter的字符编码
+    		if(httpMessageConverter instanceof StringHttpMessageConverter){
         		StringHttpMessageConverter stringConverter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
-        		stringConverter.setWriteAcceptCharset(false);
+        		stringConverter.setWriteAcceptCharset(false);// see SPR-7316
         		converters.remove(i);	//移除原有的
         		converters.add(i, stringConverter);	//添加新增的
         		continue;//结束本次循环
         	}
-    		if(converters.get(i) instanceof MappingJackson2XmlHttpMessageConverter||converters.get(i) instanceof Jaxb2RootElementHttpMessageConverter){
+    		if(httpMessageConverter instanceof MappingJackson2XmlHttpMessageConverter|| httpMessageConverter instanceof Jaxb2RootElementHttpMessageConverter){
     			xml=i;
     			continue;
     		}
-    		if(converters.get(i) instanceof MappingJackson2HttpMessageConverter || converters.get(i) instanceof GsonHttpMessageConverter){
+    		if(httpMessageConverter instanceof MappingJackson2HttpMessageConverter || httpMessageConverter instanceof GsonHttpMessageConverter){
     			json=i;
+    			if(httpMessageConverter instanceof MappingJackson2HttpMessageConverter){
+					List<MediaType> supportedMediaTypes= httpMessageConverter.getSupportedMediaTypes();
+					supportedMediaTypes.add(MediaType.valueOf("text/html;charset=UTF-8"));//避免IE执行AJAX时,返回JSON出现下载文件
+				}
     			break;//结束所有循环
     		}
 		}
@@ -243,6 +255,22 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         // Configure the list of HttpMessageConverters to use
     }*/
+	@Bean
+	public ObjectMapper objectMapper(){
+		ObjectMapper objectMapper=null;
+		List<HttpMessageConverter<?>> converters = requestMappingHandlerAdapter.getMessageConverters();
+		for (int i = 0; i < converters.size(); i++) {
+			if(converters.get(i) instanceof MappingJackson2HttpMessageConverter){
+				MappingJackson2HttpMessageConverter jackson2HttpMessageConverter = (MappingJackson2HttpMessageConverter) converters.get(i);
+				objectMapper = jackson2HttpMessageConverter.getObjectMapper();
+				break;//结束所有循环
+			}
+		}
+		if(objectMapper==null){
+			objectMapper=new JsonMapper();
+		}
+		return objectMapper;
+	}
 
 	/**
 	 * HandlerInteceptor一般用于权限验证，以及一些处理风格本地化等公共代码。

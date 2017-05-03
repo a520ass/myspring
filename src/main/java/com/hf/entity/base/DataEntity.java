@@ -42,11 +42,11 @@ public class DataEntity extends BaseEntity {
 	@UpdateUser
 	protected String updateUser;
 	
-	//@DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
+	//@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	@CreationTimestamp
 	protected Date createDate;
 	
-	//@DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
+	//@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	@UpdateTimestamp
 	protected Date updateDate;
 	
