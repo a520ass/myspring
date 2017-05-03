@@ -78,7 +78,6 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 	private AsyncTaskExecutor asyncTaskExecutor;
 
 	@Autowired
-	@Qualifier("requestMappingHandlerAdapter")
 	private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
 	
 	@Bean	//Thymeleaf视图解析器
