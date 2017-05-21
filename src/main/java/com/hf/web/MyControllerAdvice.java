@@ -2,12 +2,14 @@ package com.hf.web;
 
 
 import com.hf.utils.web.WebUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver;
@@ -16,6 +18,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
 
 import javax.servlet.http.HttpServletRequest;
+import java.beans.PropertyEditorSupport;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -60,37 +64,60 @@ public class MyControllerAdvice extends ResponseEntityExceptionHandler{
 	 * for resolving known Spring exception types
 	 */
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<Object> processException(Exception e, HttpServletRequest request) {
+	public ResponseEntity<Exception> processException(Exception e, HttpServletRequest request) {
 		if (WebUtils.isAjax(request)) {
 			log.error(request.getRequestURI() + " Ajax调用发生错误:"
-					+ e.getLocalizedMessage());
+					+ e.getLocalizedMessage(),e);
 		}else{
 			log.error(request.getRequestURI() + " 链接访问发生错误:"
-					+ e.getLocalizedMessage());
+					+ e.getLocalizedMessage(),e);
 		}
 
-		return new ResponseEntity<Object>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-		/*binder.registerCustomEditor(String.class, new PropertyEditorSupport() {
+		binder.registerCustomEditor(String.class,new CustomDataEscapeEditor(true));
+	}
 
-			@Override
-			public String getAsText() {
-				Object value = getValue();
-				return value != null ? value.toString() : "";
-			}
+}
+class CustomDataEscapeEditor extends PropertyEditorSupport{
+	private final boolean allowEmpty;
 
-			@Override
-			public void setAsText(String text) throws IllegalArgumentException {
-				setValue(text == null ? null : StringEscapeUtils
-						.escapeHtml4(text.trim()));
-			}
 
-		});*/
+	public CustomDataEscapeEditor(boolean allowEmpty){
+		this.allowEmpty=allowEmpty;
+	}
+
+	/**
+	 * 从字符串 ==> 想要的类型
+	 * @param text
+	 * @throws IllegalArgumentException
+	 */
+	@Override
+	public void setAsText(String text) throws IllegalArgumentException {
+		if (this.allowEmpty && !StringUtils.hasText(text)) {
+			// Treat empty String as null value.
+			setValue(null);
+		}
+		else {
+			String value = StringEscapeUtils.escapeHtml4(text);
+			value = org.apache.commons.lang.StringEscapeUtils.escapeJavaScript(value);
+			setValue(value);
+		}
+	}
+
+	/**
+	 * 把要转换的类型  ==> 字符串
+	 * @return
+	 */
+	@Override
+	public String getAsText() {
+		Object value = getValue();
+		return (value != null ? value.toString(): "");
 	}
 
 }

@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 数据库操作性能拦截器,记录耗时
  * 
- * @Intercepts定义Signature数组,因此可以拦截多个,但是只能拦截类型为： 
+ * @Intercepts 定义Signature数组,因此可以拦截多个,但是只能拦截类型为：
  * Executor 
  * ParameterHandler
  * StatementHandler

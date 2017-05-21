@@ -2,9 +2,7 @@ package com.hf.config;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.List;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hf.utils.web.JsonMapper;
@@ -78,6 +76,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 	private AsyncTaskExecutor asyncTaskExecutor;
 
 	@Autowired
+	@Qualifier("requestMappingHandlerAdapter")
 	private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
 	
 	@Bean	//Thymeleaf视图解析器
@@ -238,8 +237,10 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     		if(httpMessageConverter instanceof MappingJackson2HttpMessageConverter || httpMessageConverter instanceof GsonHttpMessageConverter){
     			json=i;
     			if(httpMessageConverter instanceof MappingJackson2HttpMessageConverter){
-					List<MediaType> supportedMediaTypes= httpMessageConverter.getSupportedMediaTypes();
-					supportedMediaTypes.add(MediaType.valueOf("text/html;charset=UTF-8"));//避免IE执行AJAX时,返回JSON出现下载文件
+					List<MediaType> mediaTypes = new ArrayList<MediaType>(httpMessageConverter.getSupportedMediaTypes());
+					mediaTypes.add(MediaType.valueOf("text/html;charset=UTF-8"));//避免IE执行AJAX时,返回JSON出现下载文件
+					MappingJackson2HttpMessageConverter jackson2HttpMessageConverter = (MappingJackson2HttpMessageConverter) httpMessageConverter;
+					jackson2HttpMessageConverter.setSupportedMediaTypes(Collections.unmodifiableList(mediaTypes));
 				}
     			break;//结束所有循环
     		}

@@ -1,4 +1,4 @@
-package nio;
+package com.hf.nio;
 
 import org.junit.Test;
 
@@ -20,15 +20,15 @@ public class NIO2Test {
         AsynchronousFileChannel fileChannel = AsynchronousFileChannel.open(path);
         ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
 
-        fileChannel.read(byteBuffer, 0, "some", new CompletionHandler<Integer, String>() {
+        fileChannel.read(byteBuffer, 0, "private", new CompletionHandler<Integer, String>() {
             @Override
             public void completed(Integer result, String attachment) {
-
+                System.out.print(result);
             }
 
             @Override
             public void failed(Throwable exc, String attachment) {
-
+                System.out.print(attachment);
             }
         });
     }

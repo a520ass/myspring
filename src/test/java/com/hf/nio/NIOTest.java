@@ -1,9 +1,8 @@
-package nio;
+package com.hf.nio;
 
 import org.junit.Test;
 import org.springframework.util.StreamUtils;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
@@ -23,14 +22,17 @@ public class NIOTest {
         FileChannel inChannel = accessFile.getChannel();
         //create buffer with capacity of 48 bytes
 
-        ByteBuffer buffer = ByteBuffer.allocate(StreamUtils.BUFFER_SIZE);
+        ByteBuffer buffer = ByteBuffer.allocate(48);
+        byte[] bytes = new byte[48];
         int read = inChannel.read(buffer);
         while (read!=-1){
-            System.out.println("Read " + read);
+            System.out.println("读取字节数为.... " + read);
             //flip方法将Buffer从写模式切换到读模式
             buffer.flip();
             while (buffer.hasRemaining()){
-                System.out.print((char) buffer.get());
+                //System.out.print((char) buffer.get());
+                buffer.get(bytes,0,read);
+                System.out.print(new String(bytes,"utf-8"));
             }
             /**
              * 有两种方式能清空缓冲区：调用clear()或compact()方法。

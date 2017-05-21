@@ -44,12 +44,7 @@
 
 	<plugins>
 		<plugin interceptor="org.apache.ibatis.plugin.TimerInterceptor"></plugin>
-		<plugin interceptor="org.apache.ibatis.plugin.SchemaInterceptor"></plugin>
 
-		<!-- mybatis 乐观锁插件
-		<plugin interceptor="com.mook.locker.interceptor.OptimisticLocker">
-			<property name="versionColumn" value="version"/>
-		</plugin>-->
 	</plugins>
 	
 </configuration>
