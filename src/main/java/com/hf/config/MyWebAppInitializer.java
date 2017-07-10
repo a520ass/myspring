@@ -13,11 +13,10 @@ import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.filter.Slf4jRequestLoggingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import com.hf.config.custom.Listener.MyServletListener;
-import com.hf.config.custom.Listener.SessionCreatedListener;
-import com.hf.config.custom.Listener.SessionDestroyedListener;
+import com.hf.config.custom.listener.MyServletListener;
 import com.hf.config.custom.filter.MyFilter;
 import com.hf.config.custom.servlet.MyServlet;
+import org.springframework.web.util.IntrospectorCleanupListener;
 
 /**
  * order 设置顺序
@@ -96,6 +95,9 @@ public class MyWebAppInitializer extends AbstractAnnotationConfigDispatcherServl
 		filter.addMappingForUrlPatterns(null, false, "/custom/*");
 		//listener
 		servletContext.addListener(MyServletListener.class);
+		//spring 托管的bean不需要使用这个监听器.因为spring它自己的introspection所使用的缓冲在分析完一个类之后会被马上从javaBeans Introspector缓冲中清除掉.
+		//应用程序中的类从来不直接使用JavaBeans Introspector.所以他们一般不会导致内部查看资源泄露.但是一些类库和框架往往会产生这个问题.例如:Struts 和Quartz.
+		servletContext.addListener(IntrospectorCleanupListener.class);
 	}
 
 }

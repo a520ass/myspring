@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Component
 public @interface RemoteService {
 
     ServiceType serviceType() default ServiceType.HTTPINVOKER;

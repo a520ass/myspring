@@ -13,7 +13,7 @@ public class SocketChannelTest {
     public static void main(String[] args) throws IOException {
         SocketChannel socketChannel = SocketChannel.open();
         socketChannel.configureBlocking(true);
-        socketChannel.connect(new InetSocketAddress(9999));
+        socketChannel.connect(new InetSocketAddress(63579));
 
         while (!socketChannel.finishConnect()){
             String newData = "New String to write to file..." + System.currentTimeMillis();
