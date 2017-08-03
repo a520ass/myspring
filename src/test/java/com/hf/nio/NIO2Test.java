@@ -23,7 +23,7 @@ public class NIO2Test {
         fileChannel.read(byteBuffer, 0, "private", new CompletionHandler<Integer, String>() {
             @Override
             public void completed(Integer result, String attachment) {
-                System.out.print(result);
+                System.out.print(attachment);
             }
 
             @Override

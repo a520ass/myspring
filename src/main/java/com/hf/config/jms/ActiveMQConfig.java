@@ -18,6 +18,9 @@ import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.destination.DestinationResolver;
 import org.springframework.jms.support.destination.DynamicDestinationResolver;
 
+import javax.jms.DeliveryMode;
+import javax.jms.Session;
+
 //@Configuration
 //@EnableJms
 //@ComponentScan("spittr.config.jms")
@@ -123,14 +126,15 @@ public class ActiveMQConfig implements JmsListenerConfigurer {
 		jmsTemplate.setMessageConverter(jmsmessageConverter);
 		jmsTemplate.setPubSubDomain(false);			//pubSubDomain "true" for the Publish/Subscribe domain (Topics), "false" for the Point-to-Point domain (Queues)
 		jmsTemplate.setExplicitQosEnabled(true);	//deliveryMode, priority, timeToLive 的开关，要生效，必须配置为true，默认false
-		jmsTemplate.setDeliveryMode(2);				//发送模式  DeliveryMode.NON_PERSISTENT=1:非持久 ; DeliveryMode.PERSISTENT=2:持久
+		jmsTemplate.setDeliveryMode(DeliveryMode.PERSISTENT);				//发送模式  DeliveryMode.NON_PERSISTENT=1:非持久 ; DeliveryMode.PERSISTENT=2:持久
 		/**	消息应答方式  
 		 * 	Session.AUTO_ACKNOWLEDGE  消息自动签收  
 	        Session.CLIENT_ACKNOWLEDGE  客户端调用acknowledge方法手动签收  
 	        Session.DUPS_OK_ACKNOWLEDGE 不必必须签收，消息可能会重复发送 
 		 */
-		jmsTemplate.setSessionAcknowledgeMode(1);	
-        
+		jmsTemplate.setSessionAcknowledgeMode(Session.CLIENT_ACKNOWLEDGE);
+
+
 		return jmsTemplate;
 	}
 	

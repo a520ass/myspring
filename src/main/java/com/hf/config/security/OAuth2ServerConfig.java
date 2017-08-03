@@ -36,7 +36,7 @@ import javax.sql.DataSource;
  * @author Rob Winch
  *
  */
-@Configuration
+//@Configuration
 public class OAuth2ServerConfig {
 
     private static final String PROJECT_RESOURCE_ID = "myspringrs";

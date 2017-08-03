@@ -22,6 +22,6 @@ public class FileChannelTest {
 
         long position = 0;
         long count = fromFileChannel.size();
-        //long l = toFileChannel.transferFrom(position, count, fromFileChannel);
+        long l = toFileChannel.transferFrom(fromFileChannel,position,count);
     }
 }
