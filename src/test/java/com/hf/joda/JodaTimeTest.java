@@ -12,8 +12,8 @@ public class JodaTimeTest {
 
     @Test
     public void testJoda1(){
-        DateTime start = DateTime.parse("2017-01");
-        DateTime end = DateTime.parse("2017-04");
+        DateTime start = DateTime.parse("2017-05");
+        DateTime end = DateTime.parse("2017-09");
         Period p = new Period(start,end, PeriodType.yearMonthDay());//最后一个参数如果不写的话，下面的返回值将会是错误的。
 
         int year = p.getYears();

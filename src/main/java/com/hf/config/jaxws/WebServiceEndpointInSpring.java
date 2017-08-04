@@ -15,7 +15,7 @@ import com.hf.entity.Order;
  * @author 520
  *
  */
-@Component
+//@Component
 @WebService(serviceName="MyWebServiceInSpring")
 public class WebServiceEndpointInSpring{
 	

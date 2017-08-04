@@ -10,6 +10,11 @@ public abstract class GlobalConfig {
 	 * 基本web包名
 	 */
 	public static final String BASEWEBPACKAGES="com.hf.web";
+
+	/**
+	 * 基本web包名
+	 */
+	public static final String BASEWEBSOCKETPACKAGES="com.hf.websocket";
 	
 	/**
 	 * 项目访问根路径（内部）

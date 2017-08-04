@@ -1,5 +1,6 @@
 package com.hf.config.websocket.stomp;
 
+import com.hf.config.GlobalConfig;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.ChannelRegistration;
@@ -11,7 +12,7 @@ import org.springframework.web.socket.config.annotation.WebSocketTransportRegist
 
 @Configuration
 @EnableWebSocketMessageBroker
-@ComponentScan(basePackages = { "spittr.websocket" })	//扫描websocket,不能从webconfig里面扫描
+@ComponentScan(basePackages = {GlobalConfig.BASEWEBSOCKETPACKAGES})	//扫描websocket,不能从webconfig里面扫描
 public class WebSocketStompConfig extends
 		AbstractWebSocketMessageBrokerConfigurer {
 
@@ -46,10 +47,5 @@ public class WebSocketStompConfig extends
 					.setSendBufferSizeLimit(512 * 1024)
 					.setMessageSizeLimit(128 * 1024);
 	}
-
-	/*
-	 * @Bean //手动注入。因为放web目录下。WebLogAspect aop会报错。 public MarcoController
-	 * marcoController(){ return new MarcoController(); }
-	 */
 
 }

@@ -6,7 +6,6 @@
  */
 package org.hibernate.annotations;
 
-import org.hibernate.tuple.CreationTimestampGeneration;
 import org.hibernate.tuple.CreationUserGeneration;
 
 import java.lang.annotation.Retention;

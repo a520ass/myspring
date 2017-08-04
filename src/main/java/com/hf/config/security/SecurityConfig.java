@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/resources/**","/marco/**","/ws/**","/*.service");
+		web.ignoring().antMatchers("/resources/**","/mywebsocket/**","/ws/**","/*.service");
 	}
 	
 	/**
@@ -70,13 +70,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/register").permitAll()
 				.anyRequest().authenticated()
 				.and()
-			.exceptionHandling()
+		/*	.exceptionHandling()
 				.accessDeniedPage("/login.jsp?authorization_error=true")
 				.and()
 				// TODO: put CSRF protection back into this endpoint
 				.csrf()
 				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/oauth/authorize"))
-				.disable()
+				.disable()*/
 			.formLogin()
 				.loginPage("/login")
 				.defaultSuccessUrl("/home")

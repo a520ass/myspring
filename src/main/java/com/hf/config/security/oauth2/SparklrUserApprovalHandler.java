@@ -1,4 +1,4 @@
-package com.hf.config.security;
+package com.hf.config.security.oauth2;
 
 import java.util.Collection;
 

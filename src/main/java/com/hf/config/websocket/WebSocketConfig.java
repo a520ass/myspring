@@ -14,14 +14,14 @@ public class WebSocketConfig implements WebSocketConfigurer{
 
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(marcoHandler(), "/marco")
+		registry.addHandler(myWebSocketHandler(), "/mywebsocket")
 				.addInterceptors(new HttpSessionHandshakeInterceptor())
 				.withSockJS();
 	}
 	
 	@Bean
-	public MarcoHandler marcoHandler(){
-		return new MarcoHandler();
+	public MyWebSocketHandler myWebSocketHandler(){
+		return new MyWebSocketHandler();
 	}
 	
 	@Bean	//websocket容器 For Tomcat, WildFly, and Glassfish

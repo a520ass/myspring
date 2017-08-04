@@ -1,11 +1,10 @@
-package com.hf.config.security;
+package com.hf.config.security.oauth2;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -41,7 +40,7 @@ public class OAuth2ServerConfig {
 
     private static final String PROJECT_RESOURCE_ID = "myspringrs";
 
-    @Configuration
+    //@Configuration
     @EnableResourceServer
     protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
@@ -77,7 +76,7 @@ public class OAuth2ServerConfig {
 
     }
 
-    @Configuration
+    //@Configuration
     @EnableAuthorizationServer
     protected static class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
