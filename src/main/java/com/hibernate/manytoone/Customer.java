@@ -1,9 +1,12 @@
 package com.hibernate.manytoone;
 
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+
 public class Customer {
 
 	private Integer customerId;
 	private String customerName;
+	private String sex;
 
 	public Integer getCustomerId() {
 		return customerId;
@@ -21,4 +24,16 @@ public class Customer {
 		this.customerName = customerName;
 	}
 
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	@Override
+	public String toString() {
+		return ReflectionToStringBuilder.toString(this);
+	}
 }

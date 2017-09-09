@@ -25,4 +25,9 @@ public abstract class GlobalConfig {
 	 * rmi
 	 */
 	public static final String RMICTXLOCAL="rmi://127.0.0.1:1099";
+
+	public static final String[] parsePatterns = {
+			"yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM",
+			"yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM",
+			"yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss", "yyyy.MM.dd HH:mm", "yyyy.MM"};
 }

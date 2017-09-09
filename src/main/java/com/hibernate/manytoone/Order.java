@@ -1,5 +1,7 @@
 package com.hibernate.manytoone;
 
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+
 public class Order {
 	
 	private Integer orderId;
@@ -30,7 +32,9 @@ public class Order {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return ReflectionToStringBuilder.toString(this);
+	}
 }

@@ -89,8 +89,16 @@
 		<dependency>
 			<groupId>com.rabbitmq.jms</groupId>
 			<artifactId>rabbitmq-jms</artifactId>
-			<version>1.5.0</version>
+			<version>1.6.0</version>
 		</dependency>
+
+		<!-- apache.rocketmq -->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>4.1.0-incubating</version>
+        </dependency>
+
 
 		<dependency>
 		    <groupId>org.redisson</groupId>
@@ -418,6 +426,12 @@
 		            <artifactId>slf4j-log4j12</artifactId>
 		        </exclusion>
 		    </exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>net.bramp.ffmpeg</groupId>
+			<artifactId>ffmpeg</artifactId>
+			<version>0.6.1</version>
 		</dependency>
 		
 		<dependency>

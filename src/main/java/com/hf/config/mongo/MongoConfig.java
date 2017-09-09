@@ -14,12 +14,12 @@ public class MongoConfig extends AbstractMongoConfiguration{
 
 	@Override
 	protected String getDatabaseName() {
-		return "database";
+		return "mymgdb";
 	}
 
 	@Override
 	public Mongo mongo() throws Exception {
-		return new MongoClient("purelybeibei.com");
+		return new MongoClient("172.0.50.1",28885);
 	}
 	
 }

@@ -4,24 +4,28 @@
 
 <hibernate-mapping package="com.hibernate.manytoone">
 
-    <class name="Order" table="ORDERS">
+    <class name="Order" table="hb_manytoone_orders">
 
         <id name="orderId" type="java.lang.Integer">
-            <column name="ORDER_ID" />
+            <column name="order_id" />
             <generator class="native" />
         </id>
         
         <property name="orderName" type="java.lang.String">
-            <column name="ORDER_NAME" />
+            <column name="order_name" />
         </property>
         
 		<!-- 
-			映射多对一的关联关系。 使用 many-to-one 来映射多对一的关联关系 
+			映射多对一的关联关系。
+			使用 many-to-one 来映射多对一的关联关系
 			name: 多这一端关联的一那一端的属性的名字
 			class: 一那一端的属性对应的类名
 			column: 一那一端在多的一端对应的数据表中的外键的名字
+			cascade 表示主控方（Order）进行save-pdate、delete等相关操作时，
+			被控方（Customer）是否也一并进行相关操作，简单的说，也就是您储存或更新Order实例时，被参考到的Customer实例是否一并对资料库发生储存或操作，
+			设定为all，表示主控方任何操作，被控方也进行对应操作
 		-->
-		<many-to-one name="customer" class="Customer" column="CUSTOMER_ID"></many-to-one>
+		<many-to-one name="customer" class="Customer" column="customer_id" cascade="all"></many-to-one>
 
     </class>
 </hibernate-mapping>

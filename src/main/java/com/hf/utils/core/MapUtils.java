@@ -18,18 +18,14 @@ public class MapUtils {
             throws Exception {
         if (map == null)
             return null;
-
         Object obj = beanClass.newInstance();
-
         org.apache.commons.beanutils.BeanUtils.populate(obj, map);
-
         return obj;
     }
 
     public static Map<?, ?> objectToMapA(Object obj) {
         if (obj == null)
             return null;
-
         return new org.apache.commons.beanutils.BeanMap(obj);
     }
 

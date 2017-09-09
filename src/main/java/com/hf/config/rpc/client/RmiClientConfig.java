@@ -7,7 +7,7 @@ import org.springframework.remoting.rmi.RmiProxyFactoryBean;
 import com.hf.config.GlobalConfig;
 import com.hf.config.rpc.AccountService;
 
-@Configuration
+//@Configuration
 public class RmiClientConfig {
 	
 	@Bean

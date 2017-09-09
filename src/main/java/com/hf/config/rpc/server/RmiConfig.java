@@ -7,7 +7,7 @@ import org.springframework.remoting.rmi.RmiServiceExporter;
 
 import com.hf.config.rpc.AccountService;
 
-@Configuration
+//@Configuration
 public class RmiConfig {
 	
 	@Autowired AccountService accountService;

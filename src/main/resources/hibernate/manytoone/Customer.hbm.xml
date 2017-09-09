@@ -4,15 +4,19 @@
 
 <hibernate-mapping>
     
-    <class name="com.hibernate.manytoone.Customer" table="CUSTOMERS">
+    <class name="com.hibernate.manytoone.Customer" table="hb_manytoone_customers">
     
         <id name="customerId" type="java.lang.Integer">
-            <column name="CUSTOMER_ID" />
+            <column name="customer_id" />
             <generator class="native" />
         </id>
     
         <property name="customerName" type="java.lang.String">
-            <column name="CUSTOMER_NAME" />
+            <column name="customer_name" />
+        </property>
+
+        <property name="sex" type="java.lang.String">
+            <column name="customer_sex"/>
         </property>
         
     </class>

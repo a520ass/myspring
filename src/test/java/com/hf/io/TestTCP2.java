@@ -21,7 +21,7 @@ public class TestTCP2 {
 		OutputStream os = null;
 		InputStream is = null;
 		try {
-			socket = new Socket(InetAddress.getByName("127.0.0.1"),8989);
+			socket = new Socket(InetAddress.getByName("127.0.0.1"),9999);
 			os = socket.getOutputStream();
 			os.write("我是客户端".getBytes());
 			//shutdownOutput():执行此方法，显式的告诉服务端发送完毕！

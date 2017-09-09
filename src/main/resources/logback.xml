@@ -9,9 +9,9 @@
 
 	<appender name="rollingFile"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/tmp/logs/myspringbyhefeng.log</file>
+		<file>/temp/logs/myspringbyhefeng.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>/tmp/logs/myspringbyhefeng.%d{yyyy-MM-dd}.log
+			<fileNamePattern>/temp/logs/myspringbyhefeng.%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 		</rollingPolicy>
 		<encoder>
