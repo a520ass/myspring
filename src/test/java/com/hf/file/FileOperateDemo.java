@@ -249,7 +249,7 @@ public class FileOperateDemo {
 //		copyGeneralFile("E:\\Assemble.txt", "E:\\New.txt");	//复制文件
 //		copyGeneralFile("E:\\hello", "E:\\world");			//复制文件夹
 //		deleteGeneralFile("E:\\onlinestockdb.sql");			//删除文件
-		deleteGeneralFile("D:\\software\\development\\spring-tool-suite-3.8.1.RELEASE-e4.6-win32-x86_64");						//删除文件夹
+		deleteGeneralFile("C:\\Windows.old(1)");						//删除文件夹
 //		cutGeneralFile("E:\\hello", "E:\\world");			//剪切文件夹
 //		cutGeneralFile("E:\\Difficult.java", "E:\\Cow\\");	//剪切文件
 	}
